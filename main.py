@@ -27,8 +27,6 @@ def water(imagem_escolhida, tipo):
     # Realiza a plotagem das imagens
     ut_img.plotagem_imagem(Imagem_Original, Imagem_Filtrada)
     
-    
-    
     # Salva a imagem na pasta de resultados
     #if SAVE:
     #    ut_img.salvar_imagem(Imagem_Filtrada, './resultados/{}_{}_sigma_{}_threshold_{}.png'.format(imagem_escolhida.split('.')[0], tipo, sigma, threshold))

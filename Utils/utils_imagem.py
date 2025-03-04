@@ -19,14 +19,13 @@ def leitura_Imagem(nome):
 # Realiza a plotagem das imagens com o matplotlib
 def plotagem_imagem(Imagem_Original, Imagem_Filtrada):
     
-    # Cria a figura com os subplots
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
     
     # Adiciona as imagens nos subplots
     axs[0].imshow(Imagem_Original)
     axs[0].set_title('Imagem Original')
     
-    axs[1].imshow(Imagem_Filtrada, cmap='Greys')
+    axs[1].imshow(Imagem_Filtrada, cmap='gray')
     axs[1].set_title('Imagem Filtrada')
     
     # Remove os eixos dos subplots
