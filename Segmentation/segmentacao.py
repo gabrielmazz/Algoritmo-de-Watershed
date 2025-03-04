@@ -19,18 +19,8 @@ def _get_neighbors(height, width, pixel):
     neighbors = np.array([n for n in neighbors if not np.array_equal(n, pixel)])
     return neighbors
 
-def watershed(image, sigma=6, levels=64):
-    """
-    Aplica o algoritmo de watershed em uma imagem.
-    
-    Parâmetros:
-        image: Imagem de entrada (numpy array 2D).
-        sigma: Parâmetro de suavização do filtro Gaussiano (default: 1).
-        levels: Número de níveis de intensidade para o watershed (default: 64).
-    
-    Retorna:
-        labels: Matriz de rótulos resultante do watershed.
-    """
+def watershed(image, sigma, levels):
+
     # Passo 1: Suavizar a imagem com um filtro Gaussiano
     if sigma > 0:
         image = gaussian_filter(image, sigma=sigma)

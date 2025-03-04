@@ -52,9 +52,9 @@ def lista_imagens_pasta(pasta, console):
 
 def escolher_imagens(imagens, console):
     
-    # Escolhe uma imagem para aplicar o filtro Box
+    # Escolhe uma imagem para aplicar o Watershed
     while True:
-        escolha = int(Prompt.ask('Escolha uma imagem para aplicar o [bold purple]Filtro Box[/bold purple]:', console=console))
+        escolha = int(Prompt.ask('Escolha uma imagem para aplicar o [bold purple]Watershed[/bold purple]:', console=console))
         
         if escolha > 0 and escolha <= len(imagens):
             return imagens[escolha-1]

@@ -13,24 +13,21 @@ parser = argparse.ArgumentParser()
 # Argumento para salvar a imagem na pasta de resultados
 SAVE = parser.add_argument('--save', action='store_true', help='Salvar a imagem na pasta de resultados')
 
-def water(imagem_escolhida, tipo):
-    
-    # Leitura da imagem com o matplotlib para a plotagem depois
-    #Imagem_Original_Mat = ut_img.leitura_Imagem_Matplotlib('./imagens/{}'.format(imagem_escolhida))
+def water(imagem_escolhida, tipo, sigma, levels):
     
     # Leitura da imagem
     Imagem_Original = ut_img.leitura_Imagem('./imagens/{}'.format(imagem_escolhida))    
 
     # Filtro de Marr-Hildreth
-    Imagem_Filtrada = segmentation.watershed(Imagem_Original)
+    Imagem_Filtrada = segmentation.watershed(Imagem_Original, sigma, levels)
     
     # Realiza a plotagem das imagens
     ut_img.plotagem_imagem(Imagem_Original, Imagem_Filtrada)
     
     # Salva a imagem na pasta de resultados
-    #if SAVE:
-    #    ut_img.salvar_imagem(Imagem_Filtrada, './resultados/{}_{}_sigma_{}_threshold_{}.png'.format(imagem_escolhida.split('.')[0], tipo, sigma, threshold))
-        
+    if SAVE:
+        ut_img.salvar_imagem(Imagem_Filtrada, './resultados/{}_{}_sigma_{}_levels_{}.png'.format(imagem_escolhida.split('.')[0], tipo, sigma, levels))
+
 if __name__ == '__main__':
     
     ut_code.clear_terminal()
@@ -46,7 +43,7 @@ if __name__ == '__main__':
     imagem_escolhida = ut_img.escolher_imagens(imagens_disponiveis, console)
     
     # Define os valores de sigma e threshold
-    #sigma = float(Prompt.ask('\nDigite o [bold purple]valor[/bold purple] do [bold purple]sigma[/bold purple] [cyan](sigma)[/cyan] [green](default 3.5)[/green]', default=3.5))
-    #threshold = float(Prompt.ask('Digite o [bold purple]valor[/bold purple] do [bold purple]threshold[/bold purple] [cyan](threshold)[/cyan] [green](default 0.7)[/green]', default=0.7))
-    
-    water(imagem_escolhida, 'watershed')
+    sigma = float(Prompt.ask('\nDigite o [bold purple]valor[/bold purple] do [bold purple]sigma[/bold purple] [cyan](sigma)[/cyan] [green](default 1)[/green]', default=1))
+    levels = int(Prompt.ask('Digite o [bold purple]número[/bold purple] de [bold purple]níveis[/bold purple] [cyan](levels)[/cyan] [green](default 64)[/green]', default=64))
+
+    water(imagem_escolhida, 'watershed', sigma, levels)
