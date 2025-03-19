@@ -5,6 +5,9 @@ from rich.console import Console
 from rich.prompt import Prompt
 import os
 import cv2
+from PIL import Image
+from io import BytesIO
+import requests
 
 
 def leitura_Imagem(nome):
@@ -54,10 +57,34 @@ def escolher_imagens(imagens, console):
     
     # Escolhe uma imagem para aplicar o Watershed
     while True:
-        escolha = int(Prompt.ask('Escolha uma imagem para aplicar o [bold purple]Watershed[/bold purple]:', console=console))
+        escolha = int(Prompt.ask('Escolha uma imagem para aplicar o [bold purple]Watershed[/bold purple]', console=console))
         
         if escolha > 0 and escolha <= len(imagens):
             return imagens[escolha-1]
         else:
             console.print('Escolha inválida. Tente novamente.')
+            
+def download_imagem(args):
     
+    # Baixa a imagem da URL
+    response = requests.get(args.url)
+    
+    # Verifica se a requisição foi bem sucedida
+    if response.status_code == 200:
+        # Lê a imagem
+        Imagem = Image.open(BytesIO(response.content))
+        
+        # Define o nome da imagem
+        nome_imagem = "IMAGEM_BAIXADA_URL"  # Nome fixo
+        extensao = args.url.split('.')[-1]  # Extrai a extensão da URL (ex: jpg, png, etc.)
+        
+        # Salva a imagem com o novo nome
+        Imagem.save(f'./imagens/{nome_imagem}.{extensao}')
+        
+    else:
+        console.print('Erro ao baixar a imagem. Tente novamente.')
+
+def deletar_imagem(nome):
+    
+    # Deleta a imagem
+    os.remove('./imagens/{}'.format(nome))
