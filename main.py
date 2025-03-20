@@ -34,7 +34,7 @@ def water(imagem_escolhida, tipo, sigma, levels):
         time.sleep(1)
         
         # Filtro de Marr-Hildreth
-        progress.update(task, advance=1, description='[green]Aplicando o filtro de Marr-Hildreth...')
+        progress.update(task, advance=1, description='[green]Aplicando o filtro de Watershed...')
         Imagem_Filtrada = segmentacao.watershed(Imagem_Original, sigma, levels)
         
         time.sleep(1)
