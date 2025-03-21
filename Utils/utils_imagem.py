@@ -40,7 +40,7 @@ def plotagem_imagem(Imagem_Original, Imagem_Filtrada):
     
 def salvar_imagem(Imagem, nome):
     
-    plt.imsave(nome, Imagem, cmap='Greys')
+    plt.imsave(nome, Imagem, cmap='gray')
     
 def lista_imagens_pasta(pasta, console):
     
@@ -65,6 +65,8 @@ def escolher_imagens(imagens, console):
             console.print('Escolha inválida. Tente novamente.')
             
 def download_imagem(args):
+    
+    console = Console()
     
     # Baixa a imagem da URL
     response = requests.get(args.url)

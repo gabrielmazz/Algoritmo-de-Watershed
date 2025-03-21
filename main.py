@@ -28,13 +28,13 @@ def water(imagem_escolhida, tipo, sigma, levels):
         task = progress.add_task("[cyan]Processando...", total=3)
         
         # Leitura da imagem
-        progress.update(task, advance=1, description='[green]Lendo a imagem...')
+        progress.update(task, advance=1, description='[cyan]Lendo a imagem...')
         Imagem_Original = ut_img.leitura_Imagem('./imagens/{}'.format(imagem_escolhida))    
 
         time.sleep(1)
         
         # Filtro de Marr-Hildreth
-        progress.update(task, advance=1, description='[green]Aplicando o filtro de Watershed...')
+        progress.update(task, advance=1, description='[cyan]Aplicando o filtro de Watershed...')
         Imagem_Filtrada = segmentacao.watershed(Imagem_Original, sigma, levels)
         
         time.sleep(1)
@@ -43,7 +43,7 @@ def water(imagem_escolhida, tipo, sigma, levels):
         tempo_execucao = time.time() - tempo_inicio - 3
         
         # Realiza a plotagem das imagens
-        progress.update(task, advance=1, description='[green]Plotando as imagens...')
+        progress.update(task, advance=1, description='[cyan]Plotando as imagens...')
         ut_img.plotagem_imagem(Imagem_Original, Imagem_Filtrada)
         
     time.sleep(1)
